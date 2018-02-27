@@ -19,3 +19,15 @@ volatile unsigned long pulseIn(volatile unsigned long* pin , int value){
 	volatile unsigned long time_in_us = counts*0.0625;
 	return time_in_us;
 }
+
+int get_Meters(int cms){
+	return cms/100;
+}
+
+int get_10_Cms(int cms){
+	return (cms%100)/10;
+}
+
+int get_1_Cms(int cms){
+	return cms%10;
+}

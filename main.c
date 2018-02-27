@@ -28,6 +28,7 @@ int get_10_Cms(int cms){
 	return (cms%100)/10;
 }
 
+
 int get_1_Cms(int cms){
 	return cms%10;
 }

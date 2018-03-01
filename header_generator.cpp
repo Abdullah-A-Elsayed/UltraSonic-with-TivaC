@@ -28,7 +28,7 @@ int main()
 			else
 				x<<define<<port<<j<<" "<<type<<address<<pinaddress<<endl;
 		}
-		address=(i<3)?++address:(i==4)?0x40024:0x40025;
+		address=(i<3)?++address:(i<4)?0x40024:0x40025;
 		x<<endl<<endl;
 	}
 

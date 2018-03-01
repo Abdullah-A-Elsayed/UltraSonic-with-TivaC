@@ -43,24 +43,24 @@
 
 
 //---------------------PORTE---------------------//
-#define PE0 (volatile uint32_t *)0x40025004
-#define PE1 (volatile uint32_t *)0x40025008
-#define PE2 (volatile uint32_t *)0x40025010
-#define PE3 (volatile uint32_t *)0x40025020
-#define PE4 (volatile uint32_t *)0x40025040
-#define PE5 (volatile uint32_t *)0x40025080
-#define PE6 (volatile uint32_t *)0x40025100
-#define PE7 (volatile uint32_t *)0x40025200
+#define PE0 (volatile uint32_t *)0x40024004
+#define PE1 (volatile uint32_t *)0x40024008
+#define PE2 (volatile uint32_t *)0x40024010
+#define PE3 (volatile uint32_t *)0x40024020
+#define PE4 (volatile uint32_t *)0x40024040
+#define PE5 (volatile uint32_t *)0x40024080
+#define PE6 (volatile uint32_t *)0x40024100
+#define PE7 (volatile uint32_t *)0x40024200
 
 
 //---------------------PORTF---------------------//
-#define PF0 (volatile uint32_t *)0x40024004
-#define PF1 (volatile uint32_t *)0x40024008
-#define PF2 (volatile uint32_t *)0x40024010
-#define PF3 (volatile uint32_t *)0x40024020
-#define PF4 (volatile uint32_t *)0x40024040
-#define PF5 (volatile uint32_t *)0x40024080
-#define PF6 (volatile uint32_t *)0x40024100
-#define PF7 (volatile uint32_t *)0x40024200
+#define PF0 (volatile uint32_t *)0x40025004
+#define PF1 (volatile uint32_t *)0x40025008
+#define PF2 (volatile uint32_t *)0x40025010
+#define PF3 (volatile uint32_t *)0x40025020
+#define PF4 (volatile uint32_t *)0x40025040
+#define PF5 (volatile uint32_t *)0x40025080
+#define PF6 (volatile uint32_t *)0x40025100
+#define PF7 (volatile uint32_t *)0x40025200
 
 

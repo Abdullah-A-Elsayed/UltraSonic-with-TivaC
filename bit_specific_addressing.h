@@ -1,3 +1,13 @@
+//---------------------PORTS_BASE_ADDRESSES---------------------//
+#define PA (volatile uint32_t *)0x40004000
+#define PB (volatile uint32_t *)0x40005000
+#define PC (volatile uint32_t *)0x40006000
+#define PD (volatile uint32_t *)0x40007000
+#define PE (volatile uint32_t *)0x40024000
+#define PF (volatile uint32_t *)0x40025000
+
+
+
 //---------------------PORTA---------------------//
 #define PA0 (volatile uint32_t *)0x40004004
 #define PA1 (volatile uint32_t *)0x40004008

@@ -6,7 +6,7 @@
 #define define "#define P"
 #define type   "(volatile uint32_t *)0x"
 
-using namespace std;
+using namespace std; 
 
 int main()
 {

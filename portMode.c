@@ -1,7 +1,6 @@
 #include "stdint.h"
 #include "C:\Keil\EE319Kware\inc\tm4c123gh6pm.h"
 
-
 #define fn1(X,NUM)                                 \
 {                                                  \
 	SYSCTL_RCGCGPIO_R |= NUM;                      \
@@ -22,7 +21,7 @@
 	GPIO_PORT ## X ## _DIR_R  |= mode;             \
 	GPIO_PORT ## X ## _DEN_R  |= mode;             \
 	break;                                         \
-}
+}                                                  \
 
 #define fn3(X,NUM)                                 \
 {                                                  \
@@ -33,7 +32,7 @@
 	GPIO_PORT ## X ## _DIR_R  &= (~mode);          \
 	GPIO_PORT ## X ## _DEN_R  |= mode;             \
 	break;                                         \
-}
+}                                                  \
 
 #define create(NAME,X)                             \
 void NAME(volatile uint32_t * px, uint8_t mode)    \

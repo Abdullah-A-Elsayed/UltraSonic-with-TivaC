@@ -7,7 +7,7 @@ void delayMicroseconds( int  t)
 	for(i=0; i<t ;i++)
 	{
 	NVIC_ST_CTRL_R    = 0;
-	NVIC_ST_RELOAD_R  = 80-1;
+	NVIC_ST_RELOAD_R  = 16-1;
 	NVIC_ST_CURRENT_R = 0;
 	NVIC_ST_CTRL_R    = 5;
 	while((NVIC_ST_CTRL_R&0x10000)==0){}

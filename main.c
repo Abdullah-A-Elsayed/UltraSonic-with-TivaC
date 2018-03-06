@@ -1,42 +1,41 @@
-volatile uint32_t pulseIn(volatile uint32_t* pin , uint32_t value){
-	uint32_t turns=0 , counter_value , time_in_us , counts;
-	/*----initialize counter but don't enable it-------*/
-	NVIC_ST_CTRL_R = 0;
-	NVIC_ST_CURRENT_R = 0;
-	NVIC_ST_RELOAD_R = 0xFF;  //around 1 second
-	NVIC_ST_CTRL_R = 4;//clk src from cpu, but not enabled
+#include "functions.h"
+
+
+
+int main ()
+{
+	portMode(PA,0xFF);
+	portMode(PB,0xF7);
+	portMode(PD,0xFF);
+	portMode(PE,0xFF);
+	pinMode(PF4,1);
+	pinMode(PF1,1);
+	pinMode(PC7,1);
 	
+	uint32_t time ,distance;
 	
-	/*-----wait untill pin goes to value---------------*/
-	while(*pin==value){} 
-	while(*pin==!value){} //now i'm sure value just started
-		
-	/*-----enable counter untill pin goes to !value----*/
-	NVIC_ST_CTRL_R |= 1;//enabled
-	while(*pin==value)
+	p trig = PB2;
+	p echo = PB3;
+	
+	while(1)
 	{
-		if(NVIC_ST_CTRL_R&0x10000)
-			turns = turns + 1;
-	}//wait
-	NVIC_ST_CTRL_R = 0;  //disabled
-	counter_value = NVIC_ST_CURRENT_R;
-	
+		trigger_MS ( trig , 10 );
+	  time=pulseIn(echo, 1);
+	  distance=(time/1000000)*170;
+	  decoder(get_1_Cms (555),PB5,PB0,PD0,PB1,PD1,PE4,PD2);
+    decoder(get_10_Cms(distance),PE5,PD3,PB4,PE1,PA5,PE2,PA6);	
+		decoder(get_Meters(distance),PF1,PC7,PA4,PD6,PA3,PF4,PA2);
 		
-	/*---------------get real time---------------------*/
-	counts = turns * 0xFF + 0xFF - counter_value;
-	time_in_us = counts / 16;
-	return time_in_us;
-}
-
-uint32_t get_Meters(uint32_t cms){
-	return cms/100;
-}
-
-uint32_t get_10_Cms(uint32_t cms){
-	return (cms%100)/10;
-}
-
-
-uint32_t get_1_Cms(uint32_t cms){
-	return cms%10;
+		//*PF1=0xff;
+		//*PC7=0;
+		
+		/*
+		*PB5=0;
+		*PB0=0xff;
+		*PD0=0;
+		*PB1=0;
+		*PD1=0xff;
+		*PE4=0;
+		*PD2=0;*/
+	}
 }

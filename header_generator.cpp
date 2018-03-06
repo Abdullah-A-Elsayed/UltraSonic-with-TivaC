@@ -24,6 +24,10 @@ int main()
 	}
 	x<<endl<<endl<<endl;
 
+
+
+
+
 	port='A';
 	for(int address = 0x40004,i=0; i<6 ; i++,port++)
 	{

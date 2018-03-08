@@ -58,7 +58,7 @@ uint32_t get_1_Cms(uint32_t cms){
 void trigger_MS (volatile uint32_t *px , uint32_t Ms)
 { 
 	*px=0;
-	systic_MS(2);
+	systic_MS(10);
 	*px=0xFF;
 	systic_MS( Ms);
 	*px=0;

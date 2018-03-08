@@ -21,8 +21,9 @@ int main ()
 	{
 		trigger_MS ( trig , 10 );
 	  time=pulseIn(echo, 1);
-	  distance=(time/1000000)*170;
-	  decoder(get_1_Cms (555),PB5,PB0,PD0,PB1,PD1,PE4,PD2);
+	  distance=(time*170)/10000;
+		
+	  decoder(get_1_Cms (distance),PB5,PB0,PD0,PB1,PD1,PE4,PD2);
     decoder(get_10_Cms(distance),PE5,PD3,PB4,PE1,PA5,PE2,PA6);	
 		decoder(get_Meters(distance),PF1,PC7,PA4,PD6,PA3,PF4,PA2);
 		

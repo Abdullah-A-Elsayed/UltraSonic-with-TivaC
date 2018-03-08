@@ -425,6 +425,16 @@
               <FileType>5</FileType>
               <FilePath>.\functions.h</FilePath>
             </File>
+            <File>
+              <FileName>bit_specific_addressing.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\bit_specific_addressing.h</FilePath>
+            </File>
+            <File>
+              <FileName>tm4c123gh6pm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\tm4c123gh6pm.h</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

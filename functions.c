@@ -6,18 +6,16 @@ void SystemInit(){}
 
 uint32_t pulseIn(volatile uint32_t* pin , uint32_t value){
 	
-	uint32_t turns=0 , counter_value , time_in_us , counts;
-	
 	/*----initialize counter but don't enable it-------*/
 	NVIC_ST_CTRL_R = 0;
 	NVIC_ST_CURRENT_R = 0;
 	NVIC_ST_RELOAD_R = 0xFFFFFF;  //around 1 second
 	NVIC_ST_CTRL_R = 4;           //clk src from cpu, but not enabled
 	
-	
 	/*-----wait untill pin goes to value---------------*/
-	while( ((*pin)&&(value)) || ((!*pin)&&(!value)) ){} 
-	while( ((*pin)&&(!value)) || ((!*pin)&&(value)) ){} //now i'm sure value just started
+	//while( ((*pin)&&(value)) || ((!*pin)&&(!value)) ){} 
+	
+	while( ((*pin)&&(!value)) || ((!*pin)&&(value)) ){}   //now i'm sure value just started
 		
 		
 	/*-----enable counter untill pin goes to !value----*/
@@ -25,17 +23,13 @@ uint32_t pulseIn(volatile uint32_t* pin , uint32_t value){
 	while( ((*pin)&&(value)) || ((!*pin)&&(!value)) )
 	{
 		if(NVIC_ST_CTRL_R&0x10000)
-			turns = turns + 1;
+			return 0;        //if it takes more than 1 second so there is no object in front of the sensor
 	}//wait
 
 	NVIC_ST_CTRL_R = 0;            //disabled
-	counter_value = NVIC_ST_CURRENT_R;
 	
-		
 	/*---------------get real time---------------------*/
-	counts = turns * 0xFFFFFF + 0xFFFFFF - counter_value ;
-	time_in_us = counts / 16;
-	return time_in_us;
+	return ((0xFFFFFF - NVIC_ST_CURRENT_R) / 16);
 }
 
 

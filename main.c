@@ -1,33 +1,41 @@
-volatile unsigned long pulseIn(volatile unsigned long* pin , int value){
-	/*----initialize counter but don't enable it-------*/
-	NVIC_ST_CURRENT_R = 0;
-	NVIC_ST_CTRL_R |= 4;//clk src from cpu, but not enabled
-	NVIC_ST_RELOAD_R = 16000000;//around 1 second
+#include "functions.h"
+
+
+
+int main ()
+{
+	portMode(PA,0xFF);
+	portMode(PB,0xF7);
+	portMode(PD,0xFF);
+	portMode(PE,0xFF);
+	pinMode(PF4,1);
+	pinMode(PF1,1);
+	pinMode(PC7,1);
 	
-	/*-----wait untill pin goes to value---------------*/
-	while(*pin==value){} 
-	while(*pin==!value){} //now i'm sure value just started
+	uint32_t time ,distance;
+	
+	p trig = PB2;
+	p echo = PB3;
+	
+	while(1)
+	{
+		trigger_MS ( trig , 10 );
+	  time=pulseIn(echo, 1);
+	  distance=(time/1000000)*170;
+	  decoder(get_1_Cms (555),PB5,PB0,PD0,PB1,PD1,PE4,PD2);
+    decoder(get_10_Cms(distance),PE5,PD3,PB4,PE1,PA5,PE2,PA6);	
+		decoder(get_Meters(distance),PF1,PC7,PA4,PD6,PA3,PF4,PA2);
 		
-	/*-----enable counter untill pin goes to !value----*/
-	NVIC_ST_CTRL_R |= 1;//enabled
-	while(*pin==value){}//wait
-	volatile unsigned long counter_value = NVIC_ST_CURRENT_R;
-	NVIC_ST_CTRL_R |= 0;//disabled
+		//*PF1=0xff;
+		//*PC7=0;
 		
-	/*---------------get real time---------------------*/
-	volatile unsigned long counts = 16000000 - counter_value;
-	volatile unsigned long time_in_us = counts*0.0625;
-	return time_in_us;
-}
-
-int get_Meters(int cms){
-	return cms/100;
-}
-
-int get_10_Cms(int cms){
-	return (cms%100)/10;
-}
-
-int get_1_Cms(int cms){
-	return cms%10;
+		/*
+		*PB5=0;
+		*PB0=0xff;
+		*PD0=0;
+		*PB1=0;
+		*PD1=0xff;
+		*PE4=0;
+		*PD2=0;*/
+	}
 }
